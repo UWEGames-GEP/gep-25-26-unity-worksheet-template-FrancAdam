@@ -7,13 +7,13 @@ public class GameManager : MonoBehaviour
         GAMEPLAY,
         PAUSE
     }
-    public GameState state;
+    public GameState current_game_state;
     bool changed_state = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
-        state = GameState.GAMEPLAY;
+        current_game_state = GameState.GAMEPLAY;
 
         
     }
@@ -21,19 +21,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (state)
+        switch (current_game_state)
         {
             case GameState.GAMEPLAY:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    state = GameState.PAUSE;
+                    current_game_state = GameState.PAUSE;
                     changed_state = true;
                 }
                 break;
             case GameState.PAUSE:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    state = GameState.GAMEPLAY;
+                    current_game_state = GameState.GAMEPLAY;
                     changed_state = true;
                 }
                 break;
@@ -42,12 +42,12 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        // check to see if we have changed game state
+        // check to see if we have changed game current_game_state
         if (changed_state)
         {
             changed_state = false;
 
-            switch (state)
+            switch (current_game_state)
             {
                 case GameState.GAMEPLAY:
                     Time.timeScale = 1.0f;
@@ -61,4 +61,6 @@ public class GameManager : MonoBehaviour
 
         }
     }
+ 
+
 }
