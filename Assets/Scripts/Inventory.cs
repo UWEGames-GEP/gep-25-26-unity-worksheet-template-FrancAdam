@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> items = new List<string>();
+    public List<ItemObject> items = new List<ItemObject>();
     public GameManager manager;
 
-    public void addItem(string item_name)
+    public void addItem(ItemObject item)
     {
         if(manager.current_game_state == GameManager.GameState.GAMEPLAY)
         {
-            items.Add(item_name);
+            items.Add(item);
         }
         
         
     }
 
-    public void removeItem(string item_name)
+    public void removeItem(ItemObject item)
     {
         if (manager.current_game_state == GameManager.GameState.GAMEPLAY)
         {
-            items.Remove(item_name);
+            items.Remove(item);
         }
 
     }
@@ -40,18 +40,20 @@ public class Inventory : MonoBehaviour
 
         if (collisionItem != null && collisionItem.pickupable)
         {
-            addItem(collisionItem.name);
-            Destroy(collisionItem.gameObject);
+            addItem(collisionItem);
+            collisionItem.pickupable = false;
+            collisionItem.gameObject.SetActive(false);
+            //Destroy(collisionItem.gameObject);
             //items.Sort();
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            addItem("manually_added_item");
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    addItem("manually_added_item");
+        //}
         if (Input.GetKeyDown(KeyCode.B))
         {
             bubbleSort(items);
@@ -64,19 +66,20 @@ public class Inventory : MonoBehaviour
 
     }
 
-    void bubbleSort(List<string> list)
+    void bubbleSort(List<ItemObject> list)
     {
         int n = list.Count;
-        string temp;
         bool swapped;
+
         for (int i = 0; i < n - 1; i++)
         {
             swapped = false;
+
             for (int j = 0; j < n - 1; j++)
             {
-                if (string.Compare(list[j], list[j + 1]) > 0)
+                if (string.Compare(list[j].name, list[j + 1].name) > 0)
                 {
-                    temp = list[j];
+                    ItemObject temp = list[j];
                     list[j] = list[j + 1];
                     list[j + 1] = temp;
                     swapped = true; 
@@ -90,16 +93,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void insertionSort(List<string> list)
+    void insertionSort(List<ItemObject> list)
     {
         int n = list.Count;
 
         for (int i = 1; i < n; i++)
         {
-            string key = list[i];
+            ItemObject key = list[i];
             int j = i - 1;
 
-            while (j >= 0 && string.Compare(key, list[j]) > 0)
+            //while (j >= 0 && string.Compare(key.item_name, list[j].name) > 0)
+            while (j >= 0 && items[j].rarity > key.rarity)
             {
                 list[j + 1] = list[j];
                 j = j - 1;
