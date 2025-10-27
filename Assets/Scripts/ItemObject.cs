@@ -1,10 +1,20 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+public enum ItemRarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary
+}
+
 
 public class ItemObject : MonoBehaviour
 {
     public string item_name;
     public bool pickupable = false;
-    public bool visible = true;
+    public ItemRarity rarity;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -38,10 +38,11 @@ public class Inventory : MonoBehaviour
     {
         ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
 
-        if (collisionItem != null && collisionItem.pickupable && collisionItem.visible)
+        if (collisionItem != null && collisionItem.pickupable)
         {
             addItem(collisionItem.name);
             Destroy(collisionItem.gameObject);
+            items.Sort();
         }
     }
     // Update is called once per frame
