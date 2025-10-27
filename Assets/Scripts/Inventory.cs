@@ -42,21 +42,47 @@ public class Inventory : MonoBehaviour
         {
             addItem(collisionItem.name);
             Destroy(collisionItem.gameObject);
-            items.Sort();
+            //items.Sort();
         }
     }
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    addItem("manually_added_item");
-        //}
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    removeItem("manually_added_item");
-        //}
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            addItem("manually_added_item");
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            bubbleSort(items);
+        }
 
 
+    }
+
+    void bubbleSort(List<string> list)
+    {
+        int n = list.Count;
+        string temp;
+        bool swapped;
+        for (int i = 0; i < n - 1; i++)
+        {
+            swapped = false;
+            for (int j = 0; j < n - 1; j++)
+            {
+                if (string.Compare(list[j], list[j + 1]) > 0)
+                {
+                    temp = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = temp;
+                    swapped = true; 
+
+                }
+            }
+            if (swapped == false)
+            {
+                break;
+            }
+        }
     }
 }
