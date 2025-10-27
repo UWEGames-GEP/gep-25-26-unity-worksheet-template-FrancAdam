@@ -56,6 +56,10 @@ public class Inventory : MonoBehaviour
         {
             bubbleSort(items);
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            insertionSort(items);
+        }
 
 
     }
@@ -83,6 +87,24 @@ public class Inventory : MonoBehaviour
             {
                 break;
             }
+        }
+    }
+
+    void insertionSort(List<string> list)
+    {
+        int n = list.Count;
+
+        for (int i = 1; i < n; i++)
+        {
+            string key = list[i];
+            int j = i - 1;
+
+            while (j >= 0 && string.Compare(key, list[j]) > 0)
+            {
+                list[j + 1] = list[j];
+                j = j - 1;
+            }
+            list[j + 1] = key;
         }
     }
 }
