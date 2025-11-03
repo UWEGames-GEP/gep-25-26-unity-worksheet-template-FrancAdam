@@ -15,6 +15,7 @@ public enum SortOrder
 public class Inventory : MonoBehaviour
 {
     public List<ItemObject> items = new List<ItemObject>();
+   
     public GameManager manager;
     public SortOrder sort_order = SortOrder.Ascending;
 
@@ -50,6 +51,7 @@ public class Inventory : MonoBehaviour
 
         if (collisionItem != null && collisionItem.pickupable)
         {
+            Debug.Log(collisionItem.item_name);
             addItem(collisionItem);
             collisionItem.pickupable = false;
             collisionItem.gameObject.SetActive(false);
@@ -94,7 +96,7 @@ public class Inventory : MonoBehaviour
             {
                 if (sort_order == SortOrder.Ascending)
                 {
-                    if (string.Compare(list[j].name, list[j + 1].name) > 0)
+                    if (string.Compare(list[j].item_name, list[j + 1].item_name) > 0)
                     {
                         ItemObject temp = list[j];
                         list[j] = list[j + 1];
@@ -105,7 +107,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    if (string.Compare(list[j].name, list[j + 1].name) < 0)
+                    if (string.Compare(list[j].item_name, list[j + 1].item_name) < 0)
                     {
                         ItemObject temp = list[j];
                         list[j] = list[j + 1];
@@ -124,6 +126,7 @@ public class Inventory : MonoBehaviour
     void insertionSort(List<ItemObject> list)
     {
         int n = list.Count;
+        
 
         for (int i = 1; i < n; i++)
         {
