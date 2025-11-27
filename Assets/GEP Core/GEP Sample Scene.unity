@@ -1642,7 +1642,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  manager: {fileID: 1576591323}
   sort_order: 0
 --- !u!114 &1670122404
 MonoBehaviour:

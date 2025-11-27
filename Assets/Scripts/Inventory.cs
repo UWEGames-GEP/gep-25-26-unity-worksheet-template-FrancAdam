@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
         // find the game gameManager and reference it
         gameManager = FindAnyObjectByType<GameManager>();
 
-        Transform worldItemsTransform = GameObject.Find("WorldItems").transform;
+        worldItemsTransform = GameObject.Find("WorldItems").transform;
     }
 
     public void addItem(ItemObject item)
@@ -50,35 +50,74 @@ public class Inventory : MonoBehaviour
 
     }
 
+    //public void removeItem()
+    //{
+    //    if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY && items.Count > 0)
+    //    {
+    //        Debug.Log("overloaded function ran");
+
+    //        //checks we can remove an item from our inventory
+    //        ItemObject item = items[0];
+
+    //        // get the properties for where we want to spawn
+    //        Vector3 currentPosition = transform.position;
+    //        Vector3 forward = transform.forward;
+
+    //        Vector3 newPosition = currentPosition + forward;
+    //        newPosition += new Vector3(0, 1, 0);
+
+    //        Quaternion currentRotation = transform.rotation;
+    //        Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+
+    //        // Instantiate a copy of the held item
+    //        GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
+    //        newItem.SetActive(true);
+
+    //        //clean up existing item
+    //        items.Remove(item);
+    //        Destroy(item.gameObject);
+           
+    //    
+    //}
+
     public void removeItem()
     {
         if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY && items.Count > 0)
         {
-            Debug.Log("overloaded function ran");
-
-            //checks we can remove an item from our inventory
+            // take the first item from inventory
             ItemObject item = items[0];
 
-            // get the properties for where we want to spawn
+            // world spawn position/rotation
             Vector3 currentPosition = transform.position;
             Vector3 forward = transform.forward;
+            Vector3 newPosition = currentPosition + forward + new Vector3(0, 1, 0);
+            Quaternion currentRotation = transform.rotation * Quaternion.Euler(0, 0, 180);
 
-            Vector3 newPosition = currentPosition + forward;
-            newPosition += new Vector3(0, 1, 0);
+            // Instantiate a copy under the WorldItems parent (ensure worldItemsTransform is set in Start)
+            GameObject spawned = Instantiate(item.gameObject, newPosition, currentRotation, worldItemsTransform);
+            spawned.SetActive(true);
 
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+            // turn the spawned game object into an ItemObject and give it pickupable
+            ItemObject spawnedItemObj = spawned.GetComponent<ItemObject>();
+            if (spawnedItemObj != null)
+            {
+                spawnedItemObj.pickupable = true;
+                // optionally reset other state you want for a world item, e.g. deactivate any "held" flags
+            }
+            else
+            {
+                Debug.LogWarning("Spawned object has no ItemObject component.");
+            }
 
-            // Instantiate a copy of the held item
-            GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
-            newItem.SetActive(true);
-
-            //clean up existing item
+            // cleanup exisiting item
             items.Remove(item);
-            Destroy(item.gameObject);
-           
+            if (item.gameObject != null)
+            {
+                Destroy(item.gameObject);
+            }
         }
     }
+
 
 
 

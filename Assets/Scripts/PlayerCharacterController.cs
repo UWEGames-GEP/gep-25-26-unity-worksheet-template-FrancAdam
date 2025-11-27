@@ -9,14 +9,14 @@ public class PlayerCharacterController : ThirdPersonController
 
     //private void Start()
     //{
-    //   manager = FindAnyObjectByType<GameManager>();
+    //    manager = FindAnyObjectByType<GameManager>();
     //}
     private void OnPause(InputValue value)
     {
         if (value.isPressed)
         {
             Debug.Log("Paused Game.");
-            manager.PauseGame();
+            manager.PauseGame(); // has to be assigned in unity under player armature
         } 
     }
     private void OnRemoveItem(InputValue value)
