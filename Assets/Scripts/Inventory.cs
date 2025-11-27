@@ -16,12 +16,24 @@ public class Inventory : MonoBehaviour
 {
     public List<ItemObject> items = new List<ItemObject>();
    
-    public GameManager manager;
+    GameManager gameManager;
+    Transform worldItemsTransform;
+
     public SortOrder sort_order = SortOrder.Ascending;
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        // find the game gameManager and reference it
+        gameManager = FindAnyObjectByType<GameManager>();
+
+        Transform worldItemsTransform = GameObject.Find("WorldItems").transform;
+    }
 
     public void addItem(ItemObject item)
     {
-        if(manager.current_game_state == GameManager.GameState.GAMEPLAY)
+        if(gameManager.current_game_state == GameManager.GameState.GAMEPLAY)
         {
             items.Add(item);
         }
@@ -31,19 +43,44 @@ public class Inventory : MonoBehaviour
 
     public void removeItem(ItemObject item)
     {
-        if (manager.current_game_state == GameManager.GameState.GAMEPLAY)
+        if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY)
         {
             items.Remove(item);
         }
 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void removeItem()
     {
-        FindAnyObjectByType<GameManager>();
-        
+        if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY && items.Count > 0)
+        {
+            Debug.Log("overloaded function ran");
+
+            //checks we can remove an item from our inventory
+            ItemObject item = items[0];
+
+            // get the properties for where we want to spawn
+            Vector3 currentPosition = transform.position;
+            Vector3 forward = transform.forward;
+
+            Vector3 newPosition = currentPosition + forward;
+            newPosition += new Vector3(0, 1, 0);
+
+            Quaternion currentRotation = transform.rotation;
+            Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+
+            // Instantiate a copy of the held item
+            GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
+            newItem.SetActive(true);
+
+            //clean up existing item
+            items.Remove(item);
+            Destroy(item.gameObject);
+           
+        }
     }
+
+
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -66,8 +103,8 @@ public class Inventory : MonoBehaviour
         //{
         //    addItem("manually_added_item");
         //}
-
-        if (Input.GetKeyDown(KeyCode.B))
+        /// CHANGE THESE TO THE NEW INPUT SYSTEM
+        if (Input.GetKeyDown(KeyCode.B)) 
         {
             bubbleSort(items);
         }

@@ -19,4 +19,12 @@ public class PlayerCharacterController : ThirdPersonController
             manager.PauseGame();
         } 
     }
+    private void OnRemoveItem(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Debug.Log("Remove Item");
+            GetComponent<Inventory>().removeItem();
+        }
+    }
 }
