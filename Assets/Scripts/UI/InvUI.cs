@@ -12,9 +12,9 @@ public class InvUI : MonoBehaviour
         RefreshInventory();
     }
 
-    void RefreshInventory()
+    public void RefreshInventory()
     {
-        Debug.Log("Refresh Inventory UI");
+        //Debug.Log("Refresh Inventory UI");
 
         // function that turns all buttons off
         foreach (GameObject i in inventoryUIButtons)
