@@ -15,7 +15,7 @@ public class PlayerCharacterController : ThirdPersonController
     {
         if (value.isPressed)
         {
-            Debug.Log("Paused Game.");
+            //Debug.Log("Paused Game.");
             manager.PauseGame(); // has to be assigned in unity under player armature
         } 
     }

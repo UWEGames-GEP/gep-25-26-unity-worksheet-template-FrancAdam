@@ -43,11 +43,55 @@ public class Inventory : MonoBehaviour
 
     public void removeItem(ItemObject item)
     {
-        if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY)
+
+        // world spawn position/rotation
+        Vector3 currentPosition = transform.position;
+        Vector3 forward = transform.forward;
+        Vector3 newPosition = currentPosition + forward + new Vector3(0, 1, 0);
+        Quaternion currentRotation = transform.rotation * Quaternion.Euler(0, 0, 180);
+
+        // Instantiate a copy under the WorldItems parent (ensure worldItemsTransform is set in Start)
+        GameObject spawned = Instantiate(item.gameObject, newPosition, currentRotation, worldItemsTransform);
+        spawned.SetActive(true);
+
+        // turn the spawned game object into an ItemObject and give it pickupable
+        ItemObject spawnedItemObj = spawned.GetComponent<ItemObject>();
+        if (spawnedItemObj != null)
         {
-            items.Remove(item);
+            spawnedItemObj.pickupable = true;
+            // optionally reset other state you want for a world item, e.g. deactivate any "held" flags
+        }
+        else
+        {
+            Debug.LogWarning("Spawned object has no ItemObject component.");
         }
 
+        // cleanup exisiting item
+        items.Remove(item);
+        if (item.gameObject != null)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+
+    public void removeItem()
+    {
+        if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY && items.Count > 0)
+        {
+            // take the first item from inventory
+            ItemObject item = items[0];
+
+            removeItem(item);
+        }
+    }
+
+    public void removeItem(int index)
+    {
+        if ( index < items.Count)
+        {
+            removeItem(items[index]);
+        }
     }
 
     //public void removeItem()
@@ -79,45 +123,6 @@ public class Inventory : MonoBehaviour
            
     //    
     //}
-
-    public void removeItem()
-    {
-        if (gameManager.current_game_state == GameManager.GameState.GAMEPLAY && items.Count > 0)
-        {
-            // take the first item from inventory
-            ItemObject item = items[0];
-
-            // world spawn position/rotation
-            Vector3 currentPosition = transform.position;
-            Vector3 forward = transform.forward;
-            Vector3 newPosition = currentPosition + forward + new Vector3(0, 1, 0);
-            Quaternion currentRotation = transform.rotation * Quaternion.Euler(0, 0, 180);
-
-            // Instantiate a copy under the WorldItems parent (ensure worldItemsTransform is set in Start)
-            GameObject spawned = Instantiate(item.gameObject, newPosition, currentRotation, worldItemsTransform);
-            spawned.SetActive(true);
-
-            // turn the spawned game object into an ItemObject and give it pickupable
-            ItemObject spawnedItemObj = spawned.GetComponent<ItemObject>();
-            if (spawnedItemObj != null)
-            {
-                spawnedItemObj.pickupable = true;
-                // optionally reset other state you want for a world item, e.g. deactivate any "held" flags
-            }
-            else
-            {
-                Debug.LogWarning("Spawned object has no ItemObject component.");
-            }
-
-            // cleanup exisiting item
-            items.Remove(item);
-            if (item.gameObject != null)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-    }
-
 
 
 

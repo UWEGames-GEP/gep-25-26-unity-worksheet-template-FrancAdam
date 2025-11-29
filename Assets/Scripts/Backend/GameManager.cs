@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject InventoryUI;
     public enum GameState
     {
         GAMEPLAY,
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     {
         
         current_game_state = GameState.GAMEPLAY;
+        InventoryUI.SetActive(false);
 
         
     }
@@ -33,11 +35,17 @@ public class GameManager : MonoBehaviour
             switch (current_game_state)
             {
                 case GameState.GAMEPLAY:
-                    Time.timeScale = 1.0f;
+                    Time.timeScale = 1.0f; // time runs
+
+                    InventoryUI.SetActive(false); // turns off inventory ui while game is running
+                    Cursor.lockState = CursorLockMode.Locked; //disables mouse while gameplay
                     break;
                 
                 case GameState.PAUSE:
-                    Time.timeScale = 0.0f;
+                    Time.timeScale = 0.0f; // time stops
+
+                    InventoryUI.SetActive(true); // turns on inventory ui when paused
+                    Cursor.lockState = CursorLockMode.None; // enables mouse while paused
                     break;
 
             }
