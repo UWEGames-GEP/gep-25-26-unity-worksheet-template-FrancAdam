@@ -20,6 +20,8 @@ public class Inventory : MonoBehaviour
     Transform worldItemsTransform;
     public InvUI InvUI;
 
+    SortOrder sort_order = SortOrder.Ascending;
+    private int last_sort = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -115,16 +117,41 @@ public class Inventory : MonoBehaviour
 
 
     }
-    public void SortBubble()
+    public void bubbleSort()
     {
-        InventorySorter.bubbleSort(items);
+        InventorySorter.bubbleSort(items, sort_order);
         InvUI.RefreshInventory();
+        last_sort = 1;
     }
 
-    public void SortInsertion()
+    public void insertionSort()
     {
-        InventorySorter.insertionSort(items);
+        InventorySorter.insertionSort(items, sort_order);
         InvUI.RefreshInventory();
+        last_sort = 2;
     }
-
+    public void toggleSortOrder()
+    {
+        switch (sort_order)
+        {
+            case SortOrder.Ascending:
+                sort_order = SortOrder.Descending;
+                break;
+            case SortOrder.Descending:
+                sort_order = SortOrder.Ascending;
+                break;
+        }
+        switch (last_sort)
+        {
+            case 0:
+                Debug.Log("No sort selected");
+                break;
+            case 1:
+                bubbleSort();
+                break;
+            case 2:
+                insertionSort();
+                break;
+        }
+    }
 }

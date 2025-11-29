@@ -4,11 +4,7 @@ using static UnityEngine.Tilemaps.TilemapRenderer;
 
 public static class InventorySorter
 {
-    public static SortOrder sort_order = SortOrder.Ascending;
-
-    static int lastSort = 0;
-
-    public static void bubbleSort(List<ItemObject> list)
+    public static void bubbleSort(List<ItemObject> list, SortOrder sort_order)
     {
         int n = list.Count;
         bool swapped;
@@ -46,10 +42,9 @@ public static class InventorySorter
                 break;
             }
         }
-        lastSort = 1;
     }
 
-    public static void insertionSort(List<ItemObject> list)
+    public static void insertionSort(List<ItemObject> list, SortOrder sort_order)
     {
         int n = list.Count;
 
@@ -78,31 +73,7 @@ public static class InventorySorter
                 list[j + 1] = key;
             }
         }
-        lastSort = 2;
     }
-    //public static void toggleSortOrder()
-    //{
-    //    switch (sort_order)
-    //    {
-    //        case SortOrder.Ascending:
-    //            sort_order = SortOrder.Descending;
-    //            break;
-    //        case SortOrder.Descending:
-    //            sort_order = SortOrder.Ascending;
-    //            break;
-    //    }
-    //    switch (lastSort)
-    //    {
-    //        case 0:
-    //            Debug.Log("No sort selected");
-    //            break;
-    //        case 1:
-    //            bubbleSort(inventory.items);
-    //            break;
-    //        case 2:
-    //            insertionSort(inventory.items);
-    //            break;
-    //    }
-    //}
+
 
 }
