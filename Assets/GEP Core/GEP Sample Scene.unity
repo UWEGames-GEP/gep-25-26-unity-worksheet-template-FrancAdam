@@ -502,15 +502,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9257175
+      value: 4.278
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17376047
+      value: 5.879
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.42166853
+      value: 4.571
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1262,7 +1262,7 @@ Transform:
   m_GameObject: {fileID: 371036203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.91, y: 0, z: 8.85}
+  m_LocalPosition: {x: 12.94, y: -0.079, z: 14.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1626,7 +1626,7 @@ Transform:
   m_GameObject: {fileID: 500338026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.584, y: -0.422, z: 9.51}
+  m_LocalPosition: {x: 6.44, y: -0.422, z: 9.55}
   m_LocalScale: {x: 0.50502, y: 0.50502, z: 0.50502}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4045,7 +4045,7 @@ Transform:
   m_GameObject: {fileID: 1621573330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.55, y: 0, z: 9.15}
+  m_LocalPosition: {x: 12.397, y: 0, z: 24.734}
   m_LocalScale: {x: 0.62877, y: 0.62877, z: 0.62877}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4178,8 +4178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f58448e2d901447a336e8ef37ff33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  SprintSpeed: 5.335
+  MoveSpeed: 3.5
+  SprintSpeed: 6.5
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
@@ -5037,15 +5037,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17675
+      value: -0.94
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17875999
+      value: 3.893
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.43220997
+      value: 10.68
       objectReference: {fileID: 0}
     - target: {fileID: 7765744007903742102, guid: 6c50743c406ee0c4aba96708ea493d66, type: 3}
       propertyPath: m_LocalRotation.w
