@@ -111,12 +111,7 @@ public class Inventory : MonoBehaviour
             //items.Sort();
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-
-    }
     public void bubbleSort()
     {
         InventorySorter.bubbleSort(items, sort_order);

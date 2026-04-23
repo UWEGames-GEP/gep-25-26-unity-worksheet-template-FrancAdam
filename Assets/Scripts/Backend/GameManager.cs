@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // sets gamestate to play and disables UI
         current_game_state = GameState.GAMEPLAY;
         InventoryUI.SetActive(false);
         SortUI.SetActive(false);
@@ -22,11 +22,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     private void LateUpdate()
     {
         // check to see if we have changed game current_game_state
